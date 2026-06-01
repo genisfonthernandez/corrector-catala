@@ -2,6 +2,17 @@
 
 Aquest projecte integra recursos lliures de tercers.
 
+## Codi propi
+
+El codi propi de Corrector Català és de Genís Font Hernández i es publica sota llicència MIT.
+
+Si reutilitzes, modifiques o publiques codi derivat d'aquest projecte, conserva l'avís de copyright, la llicència i una atribució clara a:
+
+```txt
+Corrector Català, Genís Font Hernández
+https://github.com/genisfonthernandez/corrector-catala
+```
+
 ## Diccionari català
 
 El diccionari Hunspell català prové de Softcatalà:
@@ -35,4 +46,3 @@ Els textos de llicència inclosos es troben a:
 ## Nota
 
 Corrector Català no és un producte oficial de Softcatalà.
-

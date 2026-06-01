@@ -2,22 +2,16 @@
 
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/B7P820MJKB)
 
-Extensió de navegador per revisar ortografia catalana de forma local.
+Extensió de navegador per revisar ortografia catalana localment, sense servidor.
 
-La versió actual funciona com un mini corrector: obres l'extensió, escrius o enganxes text, revises paraules desconegudes, apliques suggeriments i copies el resultat. També inclou una integració experimental amb camps de text de pàgines web.
+Corrector Català funciona com un mini corrector: obres l'extensió, escrius o enganxes text, revises paraules desconegudes, apliques suggeriments i copies el resultat. També inclou una integració experimental amb camps de text de pàgines web.
 
-## Estat
-
-- Fase: prototip funcional
-- Motor: Hunspell en WebAssembly
-- Diccionari: Hunspell català de Softcatalà
-- Servidor: cap
-- Privadesa: el text no surt del navegador
+Aquest projecte no és un producte oficial de Softcatalà.
 
 ## Funcions
 
-- Popup independent des del botó de la extensió.
-- Revisió ortogràfica local.
+- Revisió ortogràfica local amb Hunspell en WebAssembly.
+- Diccionari Hunspell català de Softcatalà empaquetat dins l'extensió.
 - Suggeriments de correcció.
 - Correcció manual paraula a paraula.
 - Correcció automàtica amb la primera proposta disponible.
@@ -28,8 +22,7 @@ La versió actual funciona com un mini corrector: obres l'extensió, escrius o e
 
 - No fa correcció gramatical.
 - No revisa estil ni puntuació avançada.
-- La integració en pàgines pot fallar en editors complexos.
-- Google Docs necessita suport específic i no es considera suportat de forma estable.
+- La integració en pàgines pot fallar en editors complexos, com Google Docs.
 
 ## Instal·lació local
 
@@ -38,27 +31,38 @@ La versió actual funciona com un mini corrector: obres l'extensió, escrius o e
 3. Prem `Carrega desempaquetada`.
 4. Selecciona la carpeta arrel d'aquest projecte.
 
-Després de canviar `manifest.json`, és millor treure l'extensió i tornar-la a carregar.
+Després de canviar el codi, recarrega l'extensió des de la pàgina d'extensions.
 
 ## Proves
 
 ```powershell
 npm.cmd run test:wasm
+npm.cmd run test:extension
 ```
 
-## Documentació
+## Estructura
 
-- [Arquitectura](docs/architecture.md)
-- [Roadmap](docs/roadmap.md)
-- [Proves](docs/testing.md)
-- [Privadesa](PRIVACY.md)
-- [Atribució](ATTRIBUTION.md)
-- [Notes legals](docs/legal-notes.md)
+- `src/`: codi de l'extensió.
+- `public/dictionaries/`: diccionari Hunspell català.
+- `src/vendor/`: motor Hunspell WebAssembly necessari perquè l'extensió funcioni sense servidor.
+- `licenses/`: llicències dels recursos de tercers inclosos.
+- `scripts/`: proves automatitzades locals.
 
-## Atribució
+## Privadesa
 
-El diccionari català prové de [Softcatala/catalan-dict-tools](https://github.com/Softcatala/catalan-dict-tools). Aquest projecte no és un producte oficial de Softcatalà.
+L'extensió no envia textos, correccions ni dades personals a cap servidor extern. Consulta [PRIVACY.md](PRIVACY.md).
+
+## Reutilització i atribució
+
+El codi propi del projecte es publica sota llicència MIT. Pots reutilitzar-lo, modificar-lo o publicar-ne derivats sempre que conservis l'avís de copyright, la llicència i una atribució clara a aquest repositori:
+
+```txt
+Corrector Català, Genís Font Hernández
+https://github.com/genisfonthernandez/corrector-catala
+```
+
+Els diccionaris i llibreries de tercers mantenen les seves llicències originals. Consulta [ATTRIBUTION.md](ATTRIBUTION.md).
 
 ## Llicència
 
-El codi propi del projecte es publica sota llicència MIT. Els diccionaris i llibreries de tercers mantenen les seves llicències originals; consulta [ATTRIBUTION.md](ATTRIBUTION.md).
+Consulta [LICENSE](LICENSE), [ATTRIBUTION.md](ATTRIBUTION.md) i la carpeta `licenses/`.
