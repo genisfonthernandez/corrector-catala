@@ -1,0 +1,16 @@
+{
+  "name": "corrector-catala",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "description": "Extensio de navegador per corregir ortografia catalana localment.",
+  "scripts": {
+    "test:wasm": "node ./scripts/test-hunspell-wasm.js",
+    "test:extension": "node ./scripts/test-extension-browser.js"
+  },
+  "devDependencies": {
+    "hunspell-wasm": "^0.3.0",
+    "playwright-core": "^1.60.0"
+  }
+}

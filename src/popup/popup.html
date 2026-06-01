@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="ca">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Corrector Català</title>
+    <link rel="stylesheet" href="./popup.css">
+  </head>
+  <body>
+    <main class="app">
+      <header class="header">
+        <img src="../../public/icons/feather.svg" alt="" class="logo">
+        <h1>Corrector Català</h1>
+      </header>
+
+      <section class="panel">
+        <label class="label" for="text-input">Text</label>
+        <textarea id="text-input" rows="7" spellcheck="false" placeholder="Enganxa o escriu el text aquí."></textarea>
+        <div class="actions">
+          <button id="check-text" class="primary" type="button">Revisa</button>
+          <button id="auto-fix" type="button">Corregeix tot</button>
+          <button id="copy-text" type="button">Copia</button>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="result-header">
+          <h2>Resultats</h2>
+          <span id="status" class="status" aria-live="polite"></span>
+        </div>
+        <div id="results" class="results empty">Escriu un text i prem Revisa.</div>
+      </section>
+    </main>
+
+    <script type="module" src="./popup.js"></script>
+  </body>
+</html>
