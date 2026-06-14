@@ -8,9 +8,3 @@ public/dictionaries/**/extracted/
 
 # Internal research notes kept in the Projects workspace, not in the public repo.
 docs/*.md
-docs/investigacion-*.md
-docs/opciones-tecnicas.md
-docs/metodo-desarrollo.md
-docs/ideas.md
-docs/decisiones.md
-docs/vision.md

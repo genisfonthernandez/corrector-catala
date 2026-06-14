@@ -2,11 +2,12 @@ import { chromium } from "playwright-core";
 import { mkdtemp } from "node:fs/promises";
 import { createServer } from "node:http";
 import { tmpdir } from "node:os";
+import { existsSync } from "node:fs";
 import { join, resolve } from "node:path";
 
 const extensionPath = resolve(".");
 const userDataDir = await mkdtemp(join(tmpdir(), "corrector-catala-"));
-const bravePath = "C:\\Program Files\\BraveSoftware\\Brave-Browser\\Application\\brave.exe";
+const browserPath = findBrowser();
 const badText = "hola bon diia aquest correctro funciona sense servidro";
 const goodText = "hola bon dia aquest corrector funciona sense servidor";
 const badWords = ["diia", "correctro", "servidro"];
@@ -27,13 +28,32 @@ await new Promise((resolveServer) => server.listen(0, "127.0.0.1", resolveServer
 const { port } = server.address();
 
 const context = await chromium.launchPersistentContext(userDataDir, {
-  executablePath: bravePath,
+  executablePath: browserPath,
   headless: false,
   args: [
     `--disable-extensions-except=${extensionPath}`,
     `--load-extension=${extensionPath}`
   ]
 });
+
+function findBrowser() {
+  const configuredPath = process.env.CORRECTOR_BROWSER_PATH;
+  const candidates = [
+    configuredPath,
+    "C:\\Program Files\\BraveSoftware\\Brave-Browser\\Application\\brave.exe",
+    "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+    "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe"
+  ].filter(Boolean);
+
+  const availablePath = candidates.find((candidate) => existsSync(candidate));
+  if (availablePath) {
+    return availablePath;
+  }
+
+  throw new Error(
+    "No s'ha trobat cap navegador compatible. Defineix CORRECTOR_BROWSER_PATH amb la ruta de Brave, Chrome o Edge."
+  );
+}
 
 try {
   const page = await context.newPage();
