@@ -36,9 +36,14 @@ Després de canviar el codi, recarrega l'extensió des de la pàgina d'extension
 ## Proves
 
 ```powershell
+npm.cmd install
 npm.cmd run test:wasm
 npm.cmd run test:extension
 ```
+
+La primera prova valida el motor i el diccionari. La segona obre temporalment Brave, Chrome o Edge i comprova el popup, `textarea`, `input`, `contenteditable`, la correcció automàtica i l'aplicació del resultat.
+
+Si el navegador no és en una ruta habitual de Windows, defineix `CORRECTOR_BROWSER_PATH` abans d'executar la prova.
 
 ## Estructura
 
@@ -47,6 +52,34 @@ npm.cmd run test:extension
 - `src/vendor/`: motor Hunspell WebAssembly necessari perquè l'extensió funcioni sense servidor.
 - `licenses/`: llicències dels recursos de tercers inclosos.
 - `scripts/`: proves automatitzades locals.
+
+## Arquitectura
+
+- `manifest.json`: configuració Manifest V3.
+- `src/popup/`: corrector independent.
+- `src/content/field-assistant.js`: interfície integrada en camps editables.
+- `src/background/service-worker.js`: rep les peticions del content script.
+- `src/spellcheck/`: carrega Hunspell-WASM, tokenitza i revisa el text.
+
+El text es processa completament dins del navegador:
+
+```txt
+popup o camp editable
+  -> service worker
+  -> Hunspell-WASM
+  -> diccionari local
+  -> suggeriments
+```
+
+## Desenvolupament
+
+Després de canviar el codi:
+
+1. Recarrega l'extensió des de `chrome://extensions`.
+2. Recarrega les pàgines on vulguis provar l'assistent.
+3. Executa les dues proves abans de publicar canvis.
+
+La integració funciona amb camps simples. Google Docs no exposa un camp editable estàndard i queda fora de l'MVP actual.
 
 ## Privadesa
 
